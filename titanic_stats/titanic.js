@@ -32,14 +32,7 @@ fs.readFile('./train.csv', 'utf8', function (err, data) {
                 totalFareThirdClass += Number(fields[9]);
                 totalPassengesThirdClass++;
             }
-
-            if (Number(fields[5]) < 18) {
-                if (Number(fields[1]) === 1) {
-                    totalSurvivedChildren++;
-                } else {
-                    totalNonSurvivedChildren++;
-                }
-            } else {
+            if ((Number(fields[5]) >= 18) || (Number(fields[5]) === 0)) {
                 if (Number(fields[1]) === 1) {
                     if (fields[4] === 'male') {
                         totalSurvivedMen++;
@@ -52,6 +45,12 @@ fs.readFile('./train.csv', 'utf8', function (err, data) {
                     } else {
                         totalNonSurvivedWomen++;
                     }
+                }
+            } else {
+                if (Number(fields[1]) === 1) {
+                    totalSurvivedChildren++;
+                } else {
+                    totalNonSurvivedChildren++;
                 }
             }
         }
